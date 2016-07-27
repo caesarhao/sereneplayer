@@ -26,7 +26,7 @@
 /* #define UI_FILE PACKAGE_DATA_DIR"/ui/sereneplayer.ui" */
 #define UI_FILE "src/sereneplayer.ui"
 #define TOP_WINDOW "window"
-
+#define HEADERBAR   "headerbar"
 
 G_DEFINE_TYPE (Sereneplayer, sereneplayer, GTK_TYPE_APPLICATION);
 
@@ -42,6 +42,7 @@ sereneplayer_new_window (GApplication *app,
                            GFile        *file)
 {
 	GtkWidget *window;
+	GtkWidget *headerbar;
 
 	GtkBuilder *builder;
 	GError* error = NULL;
@@ -68,7 +69,8 @@ sereneplayer_new_window (GApplication *app,
 				UI_FILE);
         }
 
-	
+	headerbar = GTK_WIDGET (gtk_builder_get_object (builder, HEADERBAR));
+	gtk_window_set_titlebar (GTK_WINDOW (window), headerbar);
 	/* ANJUTA: Widgets initialization for sereneplayer.ui - DO NOT REMOVE */
 
 	g_object_unref (builder);
