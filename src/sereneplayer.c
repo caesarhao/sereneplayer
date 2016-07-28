@@ -20,13 +20,14 @@
 
 #include <glib/gi18n.h>
 
-
+#include "mplayerwrap.h"
 
 /* For testing propose use the local (not installed) ui file */
 /* #define UI_FILE PACKAGE_DATA_DIR"/ui/sereneplayer.ui" */
 #define UI_FILE "src/sereneplayer.ui"
 #define TOP_WINDOW "window"
 #define HEADERBAR   "headerbar"
+#define CANVAS  "canvas"
 
 G_DEFINE_TYPE (Sereneplayer, sereneplayer, GTK_TYPE_APPLICATION);
 
@@ -43,6 +44,7 @@ sereneplayer_new_window (GApplication *app,
 {
 	GtkWidget *window;
 	GtkWidget *headerbar;
+	GtkWidget *canvas;
 
 	GtkBuilder *builder;
 	GError* error = NULL;
@@ -71,6 +73,7 @@ sereneplayer_new_window (GApplication *app,
 
 	headerbar = GTK_WIDGET (gtk_builder_get_object (builder, HEADERBAR));
 	gtk_window_set_titlebar (GTK_WINDOW (window), headerbar);
+	canvas = GTK_WIDGET (gtk_builder_get_object (builder, CANVAS));
 	/* ANJUTA: Widgets initialization for sereneplayer.ui - DO NOT REMOVE */
 
 	g_object_unref (builder);
@@ -81,7 +84,7 @@ sereneplayer_new_window (GApplication *app,
 	{
 		/* TODO: Add code here to open the file in the new window */
 	}
-
+	MplayerWrap	*mwrap = mplayerwrap_new(canvas);
 	gtk_widget_show_all (GTK_WIDGET (window));
 }
 

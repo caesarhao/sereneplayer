@@ -9,7 +9,8 @@ ui_DATA = sereneplayer.ui
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(localedir)"\" \
-	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
+	-DPACKAGE_SRC_DIR=\""$(srcdir). \
+	$(gtk+-3.0_CFLAGS)"\" \
 	-DPACKAGE_DATA_DIR=\""$(pkgdatadir)"\" \
 	$(SERENEPLAYER_CFLAGS)
 
@@ -22,7 +23,9 @@ bin_PROGRAMS = sereneplayer
 sereneplayer_SOURCES = \
 	main.c \
 	sereneplayer.h \
-	sereneplayer.c	
+	sereneplayer.c \
+	mplayerwrap.c \
+	mplayerwrap.h	
 
 
 sereneplayer_LDFLAGS =
